@@ -5,6 +5,7 @@ steps:
     inputs:
       terraformVersion: 'latest'
   - task: TerraformTask@5
+    displayName: terraform init
     inputs:
       provider: 'azurerm'
       command: 'init'
@@ -12,3 +13,21 @@ steps:
       backendAzureRmStorageAccountName: 'ssgrpstorage'
       backendAzureRmContainerName: 'ssrpstorage-1'
       backendAzureRmKey: 'terraform.tfstate'
+  - task: TerraformTask@5
+    displayName: terraform validate
+    inputs:
+      provider: 'azurerm'
+      command: 'validate'
+  - task: TerraformTask@5
+    displayName: terraform Plan
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      environmentServiceNameAzureRM: 'svc'
+  - task: TerraformTask@5
+    displayName: terraform Apply
+    inputs:
+      provider: 'azurerm'
+      command: 'apply'
+      commandOptions: '--auto-approve'
+      environmentServiceNameAzureRM: 'svc'
