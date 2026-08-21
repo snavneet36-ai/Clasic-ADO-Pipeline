@@ -1,0 +1,14 @@
+trigger:
+- main
+steps:
+  - task: TerraformInstaller@1
+    inputs:
+      terraformVersion: 'latest'
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      backendServiceArm: 'svc'
+      backendAzureRmStorageAccountName: 'ssgrpstorage'
+      backendAzureRmContainerName: 'ssrpstorage-1'
+      backendAzureRmKey: 'terraform.tfstate'
